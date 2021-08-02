@@ -34,8 +34,12 @@ public class ArrayListDAO implements InterfaceBankDAO {
 
 	public Bank getAccount(String accountnumber) {
 		// TODO Auto-generated method stub
-		
-		return BANKACCOUNTS.get(BANKACCOUNTS.indexOf(accountnumber));
+	    for (Bank x : BANKACCOUNTS) {
+	    	String curAN = x.getAccountnumber();
+	        if (curAN.equals(accountnumber))
+	        	return x;
+	      }
+		return Bank.empty();
 	}
 
 
@@ -95,7 +99,7 @@ public class ArrayListDAO implements InterfaceBankDAO {
 		// TODO Auto-generated method stub
 	    for (Bank x : BANKACCOUNTS) {
 	    	String curName = x.getCustomername();
-	        if (curName == name)
+	        if (curName.equals(name))
 	        	return x;
 	      }
 		return Bank.empty();
