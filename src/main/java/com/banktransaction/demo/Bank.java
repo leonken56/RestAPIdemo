@@ -1,10 +1,10 @@
 package com.banktransaction.demo;
 public class Bank {
-	private String accountnumber;
-	private double balance;
-	private String customername;
-	private String email;
-	private String phonenumber;
+	private String accountnumber = "NULL";
+	private double balance = 0.0;
+	private String customername = "NULL";
+	private String email = "NULL";
+	private String phonenumber = "NULL";
 	
 	Bank(String accountnumber, double balance, String customername, String email, String phonenumber){
 		this.accountnumber = accountnumber;
@@ -27,7 +27,10 @@ public class Bank {
 	public void setAccountnumber(String accountnumber) {
 		this.accountnumber = accountnumber;
 	}
-
+	public static Bank empty() {
+		Bank emptyBank = new Bank("NULL",0.0,"NULL","NULL","NULL");
+		return emptyBank;
+	}
 
 	/**
 	 * @return the balance
@@ -108,13 +111,14 @@ public class Bank {
 		else System.out.println("There are insufficient fund in this account");
 	}
 
-	public void printinfo() {
+	public String printinfo() {
 		System.out.println(this.getCustomername());
 		System.out.println(this.getAccountnumber());
 		System.out.println(this.getBalance());
 		System.out.println(this.getEmail());
 		System.out.println(this.getPhonenumber());
 		System.out.println();
+		return this.getCustomername() + this.getAccountnumber() + this.getBalance() + this.getEmail() + this.getPhonenumber();
 	}
 
 }

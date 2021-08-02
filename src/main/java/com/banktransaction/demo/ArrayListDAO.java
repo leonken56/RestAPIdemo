@@ -10,60 +10,73 @@ import java.sql.Statement;
 
 
 public class ArrayListDAO implements InterfaceBankDAO {
-	ArrayList<Bank> ALLBANKUSER = new ArrayList();
+	ArrayList<Bank> BANKACCOUNTS = new ArrayList();
 	static final String DB_URL = "jdbc:mysql://database-mysql.ck2jovupcm0u.us-east-2.rds.amazonaws.com/database1";
 	static final String USER = "admin";
 	static final String PASS = "testadmin";
 	static final String QUERY = "SELECT accountnumber, customername, email, phonenumber, balance FROM user";
-	
+	public ArrayListDAO(){
+		Bank user1 = new Bank("123213114", 5000.50, "Four Pham", "nova4@gmail.com","5103334444");
+		Bank user2 = new Bank("123241225", 75000.50, "Five Pham", "nova5@gmail.com","510333555");
+		Bank user3 = new Bank("121223336", 90000.50, "Six Pham", "nova6@gmail.com","5103336666");
+		
+		addNewAccount(user1);
+		addNewAccount(user2);
+		addNewAccount(user3);
+		
+		
+	}
 	public ArrayList<Bank> getAllAccounts() {
 		// TODO Auto-generated method stub
-		return ALLBANKUSER;
+		return BANKACCOUNTS;
 	}
 
 
 	public Bank getAccount(String accountnumber) {
 		// TODO Auto-generated method stub
 		
-		return ALLBANKUSER.get(ALLBANKUSER.indexOf(accountnumber));
+		return BANKACCOUNTS.get(BANKACCOUNTS.indexOf(accountnumber));
 	}
 
 
-	public void updateName(Bank user, String name) {
+	public void updateName(String accountnumber, String name) {
 		// TODO Auto-generated method stub
-		user.setCustomername(name);
+		Bank thisBank = this.getAccount(accountnumber);
+		thisBank.setCustomername(name);
 	}
 
 
-	public void updateEmail(Bank user, String email) {
+	public void updateEmail(String accountnumber, String email) {
 		// TODO Auto-generated method stub
-		user.setEmail(email);
+		Bank thisBank = this.getAccount(accountnumber);
+		thisBank.setEmail(email);
 	}
 
 
-	public void updatePhoneNumber(Bank user, String PhoneNumber) {
+	public void updatePhoneNumber(String accountnumber, String PhoneNumber) {
 		// TODO Auto-generated method stub
-		user.setPhonenumber(PhoneNumber);
+		Bank thisBank = this.getAccount(accountnumber);
+		thisBank.setPhonenumber(PhoneNumber);
 	}
 
 
 	public void deleteAccount(String accountnumber) {
 		// TODO Auto-generated method stub
-		ALLBANKUSER.remove(ALLBANKUSER.indexOf(accountnumber));
+		BANKACCOUNTS.remove(BANKACCOUNTS.indexOf(accountnumber));
 	}
 
 	public void addNewAccount(Bank account) {
 		// TODO Auto-generated method stub
-		ALLBANKUSER.add(account);
+		BANKACCOUNTS.add(account);
 		
 	}
 
 
-	public void deposit(Bank account, double amount) {
+	public void deposit(String accountnumber, double amount) {
 		// TODO Auto-generated method stub
-		
+		Bank thisBank = this.getAccount(accountnumber);
 		if ((amount>=5) &&(amount<=10000))
-			account.deposit(amount);
+			thisBank.deposit(amount);
 		else System.out.println("Deposit fund must be between $5 - $10000");
 			
 	}
@@ -71,33 +84,38 @@ public class ArrayListDAO implements InterfaceBankDAO {
 	public String printAllBalancetoString() {
 		String result = "";
 		result += "ACCOUNT NUMBER / CUSTOMER NAME / BALANCE ($)<br>";
-	    for (Bank x : ALLBANKUSER) {
+	    for (Bank x : BANKACCOUNTS) {
 	    	result += x.getAccountnumber() + " / " + x.getCustomername() + " / Balance: $" + x.getBalance() + "<br>"; 
 	    	
 	      }
 	    return result;
 	}
 
-	public void displayinfo(String name) {
+	public Bank getAccountByName(String name) {
 		// TODO Auto-generated method stub
-	    for (Bank x : ALLBANKUSER) {
+	    for (Bank x : BANKACCOUNTS) {
 	    	String curName = x.getCustomername();
 	        if (curName == name)
-	        	x.printinfo();
+	        	return x;
 	      }
-		
+		return Bank.empty();
+	}
+	public String displayinfo(Bank account) {
+		// TODO Auto-generated method stub
+		Bank thisBank = account;
+		return thisBank.getAccountnumber() + " / " + thisBank.getCustomername() + " / " + thisBank.getEmail() + " / " + thisBank.getPhonenumber() + " / $" + thisBank.getBalance();
 	}
 
-
-	public void displaybalance(String accountnumber) {
+	public String displaybalance(String accountnumber) {
 		// TODO Auto-generated method stub
 		Bank curAccount = getAccount(accountnumber);
 		double curBalance = curAccount.getBalance();
 		System.out.println("This account [" + accountnumber + "] has a balance of: $" + curBalance);
+		return "This account [" + accountnumber + "] has a balance of: $" + curBalance;
 	}
 
 	public void displayall() {
-	    for (Bank x : ALLBANKUSER) {
+	    for (Bank x : BANKACCOUNTS) {
 	    	x.printinfo();
 	      }
 		
@@ -111,7 +129,7 @@ public class ArrayListDAO implements InterfaceBankDAO {
 			 	System.out.println("Connected database successfully...");             
 		        String sql = "";
 		        
-		 		for (Bank x : ALLBANKUSER) {
+		 		for (Bank x : BANKACCOUNTS) {
 		 			
 		 			System.out.println("Inserting "+ x.getCustomername() +" into the table...");
 		 			sql = "INSERT INTO user (accountnumber,customername,phonenumber,email,balance) VALUES "
@@ -129,4 +147,5 @@ public class ArrayListDAO implements InterfaceBankDAO {
 		 
 
 	}
+
 }
