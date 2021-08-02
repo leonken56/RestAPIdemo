@@ -37,8 +37,8 @@ public class UsersController {
 		//ALLBANK.addAlltoDatabase();
 		return "HTTP POST request was sent";
 	}
-	@DeleteMapping()
-	public String deleteUser(String accountnumber) {
+	@DeleteMapping("deleteaccount/{accountnumber}")
+	public String deleteUser(@PathVariable("accountnumber") String accountnumber) {
 		ALLBANK.deleteAccount(accountnumber);
 		return "HTTP DELETE request was sent";
 	}
