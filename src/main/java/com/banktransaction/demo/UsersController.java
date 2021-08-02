@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/UsersController")
 public class UsersController {
 	ArrayListDAO ALLBANK = new ArrayListDAO();
-	@GetMapping()
+	@GetMapping("/getAllUsers")
 	public String getAllUsers() {
 		return "HTTP GET request was sent <br>" + ALLBANK.printAllBalancetoString();
 	}
@@ -21,7 +21,7 @@ public class UsersController {
 		Bank thisbank = ALLBANK.getAccountByName(name);		
 		return thisbank.printinfo();
 	}
-	@GetMapping()
+	@GetMapping("/getUsers")
 	public String getUsers() {
 		ALLBANK.getAllAccounts();
 		return "HTTP GET request was sent <br>" + ALLBANK.printAllBalancetoString();
