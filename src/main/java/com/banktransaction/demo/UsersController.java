@@ -41,7 +41,7 @@ public class UsersController {
 	public String createUser(@RequestBody Bank newaccount) {
 		ALLBANK.addNewAccount(newaccount);
 		//ALLBANK.addAlltoDatabase();
-		return "HTTP POST request was sent";
+		return newaccount.getCustomername() + " - " + "Added";
 	}
 	@DeleteMapping("/deleteaccount/{accountnumber}")
 	public String deleteUser(@PathVariable("accountnumber") String accountnumber) {
@@ -71,13 +71,14 @@ public class UsersController {
 	
 	@GetMapping("/hello")
 	public ArrayListDAO hello() {
-		Bank user4 = new Bank("123213114", 5000.50, "Four Pham", "nova4@gmail.com","5103334444");
-		Bank user5 = new Bank("123241225", 75000.50, "Five Pham", "nova5@gmail.com","510333555");
-		Bank user6 = new Bank("121223336", 90000.50, "Six Pham", "nova6@gmail.com","5103336666");
-		ArrayListDAO ALLBANK = new ArrayListDAO();
-		ALLBANK.addNewAccount(user4);
-		ALLBANK.addNewAccount(user5);
-		ALLBANK.addNewAccount(user6);
+		
+//		Bank user4 = new Bank("123213114", 5000.50, "Four Pham", "nova4@gmail.com","5103334444");
+//		Bank user5 = new Bank("123241225", 75000.50, "Five Pham", "nova5@gmail.com","510333555");
+//		Bank user6 = new Bank("121223336", 90000.50, "Six Pham", "nova6@gmail.com","5103336666");
+//		
+//		ALLBANK.addNewAccount(user4);
+//		ALLBANK.addNewAccount(user5);
+//		ALLBANK.addNewAccount(user6);
 		//ALLBANK.addAlltoDatabase();
 		//String displayAPI = ALLBANK.displayall();
 
