@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
@@ -46,27 +47,30 @@ public class UsersController {
 	@DeleteMapping("/deleteaccount/{accountnumber}")
 	public String deleteUser(@PathVariable("accountnumber") String accountnumber) {
 		ALLBANK.deleteAccount(accountnumber);
-		return "HTTP DELETE request was sent";
+		return accountnumber + " Account has been deleted";
 	}
-	@PutMapping("/updateusername/{accountnumber}/{name}")
-	public String updateUsername(@PathVariable("accountnumber") String accountnumber,@PathVariable("name") String name ) {
-		ALLBANK.updateName(accountnumber, name);
-		return "HTTP PUT request was sent";
+	@PutMapping("/updateusername/{accountnumber}")
+	public String updateUsername(@PathVariable("accountnumber") String accountnumber,@RequestParam String value ) {
+		ALLBANK.updateName(accountnumber, value);
+		return accountnumber + "'s customer name was changed to " + value;
 	}
-	@PutMapping("/updateemail/{accountnumber}/{email}")
-	public String updateEmail(@PathVariable("accountnumber") String accountnumber,@PathVariable("email") String email ) {
-		ALLBANK.updateEmail(accountnumber, email);
-		return "HTTP PUT request was sent";
+	@PutMapping("/updateemail/{accountnumber}")
+	public String updateEmail(@PathVariable("accountnumber") String accountnumber,@RequestParam String value ) {
+		ALLBANK.updateEmail(accountnumber, value);
+		return accountnumber + "'s email was changed to " + value;
 	}
-	@PutMapping("/updatephonenumber/{accountnumber}/{phonenumber}")
-	public String updatePhonenumber(@PathVariable("accountnumber") String accountnumber,@PathVariable("phonenumber") String phonenumber ) {
-		ALLBANK.updatePhoneNumber(accountnumber, phonenumber);
-		return "HTTP PUT request was sent";
+	@PutMapping("/updatephonenumber/{accountnumber}")
+	public String updatePhonenumber(@PathVariable("accountnumber") String accountnumber,@RequestParam String value ) {
+		ALLBANK.updatePhoneNumber(accountnumber, value);
+		return accountnumber + "'s phonenumber was changed to " + value;
 	}
-	@GetMapping("/deposit/{accountnumber}/{amount}")
-	public String updatePhonenumber(@PathVariable("accountnumber") String accountnumber,@PathVariable("amount") double amount ) {
-		ALLBANK.deposit(accountnumber, amount);
-		return "HTTP PUT request was sent";
+	@PutMapping("/deposit/{accountnumber}")
+	public String updateDeposit(@PathVariable("accountnumber") String accountnumber,@RequestParam double value ) {
+		if ((value>=5) &&(value<=10000)) {
+			ALLBANK.deposit(accountnumber, value);
+			return accountnumber + " has deposited $" + value;			
+		}
+		return "Deposit fund must be between $5 - $10000";
 	}	
 	
 	@GetMapping("/hello")
