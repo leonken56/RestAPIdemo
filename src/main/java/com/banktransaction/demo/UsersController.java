@@ -57,21 +57,21 @@ public class UsersController {
 		ALLBANK.updatePhoneNumber(accountnumber, phonenumber);
 		return "HTTP PUT request was sent";
 	}
-	@PutMapping("/deposit/{accountnumber}/{amount}")
+	@GetMapping("/deposit/{accountnumber}/{amount}")
 	public String updatePhonenumber(@PathVariable("accountnumber") String accountnumber,@PathVariable("amount") double amount ) {
 		ALLBANK.deposit(accountnumber, amount);
 		return "HTTP PUT request was sent";
 	}	
 	
-	
+	@GetMapping("/hello")
 	public String hello() {
-		Bank user1 = new Bank("123213114", 5000.50, "Four Pham", "nova4@gmail.com","5103334444");
-		Bank user2 = new Bank("123241225", 75000.50, "Five Pham", "nova5@gmail.com","510333555");
-		Bank user3 = new Bank("121223336", 90000.50, "Six Pham", "nova6@gmail.com","5103336666");
+		Bank user4 = new Bank("123213114", 5000.50, "Four Pham", "nova4@gmail.com","5103334444");
+		Bank user5 = new Bank("123241225", 75000.50, "Five Pham", "nova5@gmail.com","510333555");
+		Bank user6 = new Bank("121223336", 90000.50, "Six Pham", "nova6@gmail.com","5103336666");
 		ArrayListDAO ALLBANK = new ArrayListDAO();
-		ALLBANK.addNewAccount(user1);
-		ALLBANK.addNewAccount(user2);
-		ALLBANK.addNewAccount(user3);
+		ALLBANK.addNewAccount(user4);
+		ALLBANK.addNewAccount(user5);
+		ALLBANK.addNewAccount(user6);
 		//ALLBANK.addAlltoDatabase();
 		//String displayAPI = ALLBANK.displayall();
 

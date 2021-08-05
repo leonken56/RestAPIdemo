@@ -16,9 +16,9 @@ public class ArrayListDAO implements InterfaceBankDAO {
 	static final String PASS = "testadmin";
 	static final String QUERY = "SELECT accountnumber, customername, email, phonenumber, balance FROM user";
 	public ArrayListDAO(){
-		Bank user1 = new Bank("123213114", 5000.50, "Four Pham", "nova4@gmail.com","5103334444");
-		Bank user2 = new Bank("123241225", 75000.50, "Five Pham", "nova5@gmail.com","510333555");
-		Bank user3 = new Bank("121223336", 90000.50, "Six Pham", "nova6@gmail.com","5103336666");
+		Bank user1 = new Bank("123213111", 5000.50, "One Pham", "nova1@gmail.com","5103334444");
+		Bank user2 = new Bank("123241222", 75000.50, "Two Pham", "nova2@gmail.com","510333555");
+		Bank user3 = new Bank("121223333", 90000.50, "Three Pham", "nova3@gmail.com","5103336666");
 		
 		addNewAccount(user1);
 		addNewAccount(user2);
