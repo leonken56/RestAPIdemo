@@ -1,16 +1,22 @@
 package com.banktransaction.demo;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/UsersController")
 public class UsersController {
+	@Autowired
 	ArrayListDAO ALLBANK = new ArrayListDAO();
 	@GetMapping("/getAllUsers")
 	public String getAllUsers() {
@@ -32,7 +38,7 @@ public class UsersController {
 		return ALLBANK.displaybalance(accountnumber);
 	}
 	@PostMapping("/createnewaccount")
-	public String createUser(Bank newaccount) {
+	public String createUser(@RequestBody Bank newaccount) {
 		ALLBANK.addNewAccount(newaccount);
 		//ALLBANK.addAlltoDatabase();
 		return "HTTP POST request was sent";
@@ -64,7 +70,7 @@ public class UsersController {
 	}	
 	
 	@GetMapping("/hello")
-	public String hello() {
+	public ArrayListDAO hello() {
 		Bank user4 = new Bank("123213114", 5000.50, "Four Pham", "nova4@gmail.com","5103334444");
 		Bank user5 = new Bank("123241225", 75000.50, "Five Pham", "nova5@gmail.com","510333555");
 		Bank user6 = new Bank("121223336", 90000.50, "Six Pham", "nova6@gmail.com","5103336666");
@@ -75,6 +81,6 @@ public class UsersController {
 		//ALLBANK.addAlltoDatabase();
 		//String displayAPI = ALLBANK.displayall();
 
-		return ALLBANK.printAllBalancetoString();
+		return ALLBANK;
 	}
 }

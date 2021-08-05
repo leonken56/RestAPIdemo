@@ -1,6 +1,5 @@
-package jpa;
-
-import org.springframework.context.annotation.Bean;
+//package jpa;
+//import org.springframework.context.annotation.Bean;
 
 //@Bean
 //public class DataSource {

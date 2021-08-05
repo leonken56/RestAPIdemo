@@ -2,13 +2,16 @@ package com.banktransaction.demo;
 import java.util.ArrayList;
 
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
+@Component
 public class ArrayListDAO implements InterfaceBankDAO {
 	ArrayList<Bank> BANKACCOUNTS = new ArrayList();
 	static final String DB_URL = "jdbc:mysql://database-mysql.ck2jovupcm0u.us-east-2.rds.amazonaws.com/database1";
