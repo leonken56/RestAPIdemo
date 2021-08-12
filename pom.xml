@@ -68,7 +68,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>bank-springboot-docker</finalName>
+		<finalName>bank-docker</finalName>
 	</build>
 
 </project>

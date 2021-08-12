@@ -1,4 +1,4 @@
 FROM openjdk:latest
-ADD target/docker-spring-boot.jar docker-spring-boot.jar
+ADD target/bank-docker.jar bank-docker.jar
 EXPOSE 8085
-ENTRYPOINT ["java","-jar","docker-spring-boot.jar"]
+ENTRYPOINT ["java","-jar","bank-docker.jar"]
