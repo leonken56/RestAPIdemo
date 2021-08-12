@@ -2,16 +2,13 @@ package com.banktransaction.demo;
 import java.util.ArrayList;
 
 import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Component
+
 public class ArrayListDAO implements InterfaceBankDAO {
 	ArrayList<Bank> BANKACCOUNTS = new ArrayList();
 	static final String DB_URL = "jdbc:mysql://database-mysql.ck2jovupcm0u.us-east-2.rds.amazonaws.com/database1";
@@ -148,6 +145,56 @@ public class ArrayListDAO implements InterfaceBankDAO {
 		 		}
 		 		
 		            	  
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } 
+		 
+
+	}
+	
+	
+	public void addAccounttoDatabase(Bank thisaccount) {
+		 try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		         Statement stmt = conn.createStatement();
+		      ) {		      
+		         // Execute a query
+			 	System.out.println("Connected database successfully...");             
+		        String sql = "";
+		        
+		 			System.out.println("Inserting "+ thisaccount.getCustomername() +" into the table...");
+		 			sql = "INSERT INTO user (accountnumber,customername,phonenumber,email,balance) VALUES "
+		 					+ "('"+ thisaccount.getAccountnumber() +"','"+ thisaccount.getCustomername()+"','"+ thisaccount.getPhonenumber()+"','"+ thisaccount.getEmail() +"','"+thisaccount.getBalance()+"');";
+		 			
+		 			//System.out.println(sql);
+		 			stmt.executeUpdate(sql);
+		 			System.out.println("Inserted " + thisaccount.getAccountnumber() + " record into the table...");
+
+		 		
+		            	  
+		      } catch (SQLException e) {
+		         e.printStackTrace();
+		      } 	
+		
+	}
+	
+	public void getAllfromDatabase() {
+
+		 try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		         Statement stmt = conn.createStatement();
+		         ResultSet rs = stmt.executeQuery(QUERY);
+			      ) {		      
+			         while(rs.next()){
+			            //Display values
+			        	System.out.println("-----------------------------------------");
+			            System.out.println("AccountNumber: " + rs.getString("accountnumber"));
+			            System.out.println("Name: " + rs.getString("customername"));
+			            System.out.println("Phone Number: " + rs.getString("phonenumber"));
+			            System.out.println("Email: " + rs.getString("email"));
+			            System.out.println("Balance: " + rs.getDouble("balance"));  
+			            //System.out.println("Password: " + rs.getString("password")); 
+			            //System.out.println("Created on: " + rs.getTimestamp("time")); 
+			            System.out.println("-----------------------------------------");
+			         }
 		      } catch (SQLException e) {
 		         e.printStackTrace();
 		      } 
